@@ -10,9 +10,9 @@ const ContactUs = () => {
                 <h1 className='text-4xl text-white'>Stay connected with us</h1>
             </div>
             <div className='grid grid-cols-1 justify-items-center gap-5'>
-                <input type="text" placeholder="Email Address" class="input w-full max-w-md" />
-                <input type="text" placeholder="Subject" class="input w-full max-w-md" />
-                <textarea class="textarea w-full max-w-md mb-4" placeholder="Your message" rows={6}></textarea>
+                <input type="text" placeholder="Email Address" className="input w-full max-w-md" />
+                <input type="text" placeholder="Subject" className="input w-full max-w-md" />
+                <textarea className="textarea w-full max-w-md mb-4" placeholder="Your message" rows={6}></textarea>
                 <PrimaryBtn className=''>Submit</PrimaryBtn>
             </div>
         </section>
