@@ -4,10 +4,10 @@ import { toast } from 'react-toastify';
 const UserRow = ({ user, index, refetch }) => {
 
     const makeAdmin = () => {
-        fetch(`http://localhost:5000/user/admin/${user.email}`, {
+        fetch(`https://blooming-crag-68873.herokuapp.com/user/admin/${user.email}`, {
             method: 'PUT',
             headers: {
-                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         }).then(res => {
             if (res.status === 403) {

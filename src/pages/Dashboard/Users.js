@@ -1,24 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../hooks/Loading';
 import UserRow from './UserRow';
 
 const Users = () => {
-
-    const { data: users, isLoading, refetch } = useQuery('users', () =>
-        fetch('http://localhost:5000/user', {
+    const [users, setUsers] = useState([])
+    const { data, isLoading, refetch } = useQuery('users', () =>
+        fetch('https://blooming-crag-68873.herokuapp.com/user', {
+            method: 'GET',
             headers: {
-                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         }).then(res => res.json())
     )
-    console.log(users);
+    useEffect(() => {
+        setUsers(data)
+        console.log(data);
+    }, [data])
     if (isLoading) {
         return <Loading />
     }
     return (
         <div>
-            <h1>Users {users.length}</h1>
+            <h1>Users {users?.length}</h1>
             <div class="overflow-x-auto">
                 <table class="table w-full">
                     <thead>
@@ -31,7 +35,7 @@ const Users = () => {
                     </thead>
                     <tbody>
                         {
-                            users.map((user, index) => <UserRow
+                            users?.map((user, index) => <UserRow
                                 key={index}
                                 user={user}
                                 index={index}

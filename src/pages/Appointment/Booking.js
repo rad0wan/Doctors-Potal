@@ -4,7 +4,7 @@ import Service from '../Home/Service';
 
 const Booking = ({ booking, setTreatment }) => {
 
-    const { slots, name } = booking;
+    const { slots, name, price } = booking;
 
     return (
         <div>
@@ -19,7 +19,8 @@ const Booking = ({ booking, setTreatment }) => {
                         }
                     </p>
                     <p>{slots.length} {slots.length > 1 ? 'SPACES' : 'SPACE'} AVAILABLE </p>
-                    <div className="card-actions mt-3">
+                    <p><small>Price: ${price}</small></p>
+                    <div className="card-actions mt-2">
                         {/* <button onClick={() => setTreatment(booking)} disabled={slots.length === 0} className='btn btn-secondary bg-gradient-to-r from-secondary to-primary text-white uppercase'>Book Appointment</button> */}
                         <label
                             htmlFor="booking-modal"

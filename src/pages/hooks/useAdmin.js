@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useAdmin = user => {
 
@@ -8,10 +8,10 @@ const useAdmin = user => {
     useEffect(() => {
         const email = user?.email;
         if (email) {
-            fetch(`http://localhost:5000/admin/${email}`, {
+            fetch(`https://blooming-crag-68873.herokuapp.com/admin/${email}`, {
                 method: 'GET',
                 headers: {
-                    'content-type': 'application/json',
+                    'Content-Type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
@@ -23,7 +23,7 @@ const useAdmin = user => {
                 })
         }
         console.log(email, admin);
-    }, [user])
+    }, [user, admin])
 
     return [admin, adminLoading]
 };

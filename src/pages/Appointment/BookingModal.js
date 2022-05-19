@@ -9,7 +9,7 @@ const BookingModal = ({ treatMent, date, setTreatment, refetch }) => {
 
     const [user, loading, error] = useAuthState(auth);
 
-    const { _id, slots, name } = treatMent;
+    const { _id, slots, name, price } = treatMent;
     const formateDate = format(date, 'PP')
 
     const handleSubmit = event => {
@@ -21,13 +21,14 @@ const BookingModal = ({ treatMent, date, setTreatment, refetch }) => {
             treatMent: name,
             date: formateDate,
             slot,
+            price,
             patient: user.displayName,
             patientEmail: user.email,
             phone: event.target.phone.value
         }
         console.log(booking);
 
-        axios.post('http://localhost:5000/booking', booking)
+        axios.post('https://blooming-crag-68873.herokuapp.com/booking', booking)
             .then(response => {
                 console.log(response.data, response.data.success);
                 const data = response.data;

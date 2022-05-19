@@ -2,7 +2,7 @@ import axios from 'axios';
 import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../hooks/Loading';
 
@@ -15,7 +15,7 @@ const MyAppointments = () => {
         if (loading) {
             return <Loading></Loading>
         }
-        // axios.get(`http://localhost:5000/booking?email=${user.email}`, {
+        // axios.get(`https://blooming-crag-68873.herokuapp.com/booking?email=${user.email}`, {
         //     headers: {
         //         Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         //     }
@@ -30,7 +30,7 @@ const MyAppointments = () => {
         //         }
         //         setAppointments(response.data)
         //     })
-        fetch(`http://localhost:5000/booking?email=${user.email}`, {
+        fetch(`https://blooming-crag-68873.herokuapp.com/booking?email=${user.email}`, {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -63,6 +63,7 @@ const MyAppointments = () => {
                             <th>SERVICE</th>
                             <th>TIME</th>
                             <th>DATE</th>
+                            <th>PAYMENT</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,6 +76,13 @@ const MyAppointments = () => {
                                 <td>{appointment.treatMent}</td>
                                 <td>{appointment.slot}</td>
                                 <td>{appointment.date}</td>
+                                <td>
+                                    {appointment.price && !appointment.paid && <Link to={`/dashboard/payment/${appointment._id}`}><button class="btn btn-sm btn-success">Pay</button></Link>}
+                                    {appointment.price && appointment.paid && <div>
+                                        <p class="text-success font-bold">Paid</p>
+                                        <p class="text-lime-600 font-bold">Transition Id: <br /> {appointment.transitionId}</p>
+                                    </div>}
+                                </td>
                             </tr>)
                         }
                     </tbody>

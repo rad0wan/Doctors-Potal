@@ -13,7 +13,7 @@ const AvailableAppointments = ({ date }) => {
 
 
     const { isLoading, error, data: booking, refetch } = useQuery(['available', formatDate], () =>
-        fetch(`http://localhost:5000/available?date=${formatDate}`).then(res =>
+        fetch(`https://blooming-crag-68873.herokuapp.com/available?date=${formatDate}`).then(res =>
             res.json()
         )
     )
@@ -27,7 +27,7 @@ const AvailableAppointments = ({ date }) => {
     }
 
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/available?date=${formatDate}`)
+    //     fetch(`https://blooming-crag-68873.herokuapp.com/available?date=${formatDate}`)
     //         .then(res => res.json())
     //         .then(data => setBooking(data))
     // }, [formatDate])
